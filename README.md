@@ -64,7 +64,7 @@ Magento 2.4.x Docker Setup:
            
            * Install Magento Instance in magento24 ( https://devdocs.magento.com/guides/v2.4/install-gde/composer.html )
           
-          	    1. composer create-project --repository-url=https://repo.magento.com/ magento/project-enterprise-edition=2.4.2 .
+          	    1. composer create-project --repository-url=https://repo.magento.com/ magento/project-enterprise-edition=2.4.3-p1 .
           		    * enter your Magento authentication keys
           		    
           		2. Install M2 via CLI(/var/www/magento24):
