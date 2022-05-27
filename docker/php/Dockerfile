@@ -8,6 +8,7 @@ RUN apt-get -qq install -y \
     apt-utils \
     git \
     curl \
+    wget \
     unzip \
     vim \
     nano \
@@ -61,6 +62,22 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug \
 # Install Composer
 RUN cd /usr/src && curl -sS http://getcomposer.org/installer | php
 RUN cd /usr/src && mv composer.phar /usr/bin/composer
+
+# Install n98-magerun
+RUN cd /usr/src && curl -O https://files.magerun.net/n98-magerun2.phar
+RUN cd /usr/src && chmod +x ./n98-magerun2.phar && mv n98-magerun2.phar /usr/bin/magerun
+
+
+#install ohmyposh
+RUN wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
+RUN chmod +x /usr/local/bin/oh-my-posh
+
+RUN mkdir ~/.poshthemes
+RUN wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/themes.zip -O ~/.poshthemes/themes.zip
+RUN unzip ~/.poshthemes/themes.zip -d ~/.poshthemes
+RUN chmod u+rw ~/.poshthemes/*.json
+RUN rm ~/.poshthemes/themes.zip
+RUN echo 'eval "$(oh-my-posh init bash --config ~/.poshthemes/microverse-power.omp.json)"' > ~/.bashrc
 
 # Configure MailHog
 RUN apt-get install --no-install-recommends --assume-yes --quiet ca-certificates curl git &&\
